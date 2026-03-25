@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Life Manager</title>
+<title>Life Manager - Finance Guide</title>
 <style>
 :root {
   --bg: #0f172a;
@@ -41,11 +41,7 @@ body {
 .header p { color: var(--muted); font-size: 13px; margin-bottom: 16px; }
 
 /* Tabs */
-.tabs {
-  display: flex;
-  justify-content: center;
-  gap: 0;
-}
+.tabs { display: flex; justify-content: center; gap: 0; }
 .tab {
   padding: 12px 28px;
   cursor: pointer;
@@ -248,7 +244,7 @@ label { font-size: 13px; color: var(--muted); margin-bottom: 4px; display: block
 /* Bar chart */
 .bar-chart { display: flex; flex-direction: column; gap: 10px; }
 .bar-row { display: flex; align-items: center; gap: 10px; }
-.bar-label { width: 50px; font-size: 12px; color: var(--muted); text-align: right; flex-shrink: 0; }
+.bar-label { width: 70px; font-size: 12px; color: var(--muted); text-align: right; flex-shrink: 0; }
 .bar-track { flex: 1; height: 22px; background: var(--input-bg); border-radius: 6px; overflow: hidden; position: relative; }
 .bar-fill { height: 100%; border-radius: 6px; transition: width 0.4s ease; min-width: 2px; }
 .bar-value { width: 70px; font-size: 12px; font-weight: 600; text-align: right; flex-shrink: 0; }
@@ -323,7 +319,7 @@ label { font-size: 13px; color: var(--muted); margin-bottom: 4px; display: block
   justify-content: center;
 }
 
-/* Today's schedule highlight in sidebar */
+/* Today's schedule highlight */
 .today-schedule {
   background: rgba(56,189,248,0.08);
   border-left: 3px solid var(--accent);
@@ -340,6 +336,116 @@ label { font-size: 13px; color: var(--muted); margin-bottom: 4px; display: block
 .cat-family { border-left: 3px solid var(--yellow); }
 .cat-appointment { border-left: 3px solid var(--purple); }
 
+/* Donut chart */
+.donut-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  padding: 16px 0;
+}
+.donut-svg { width: 180px; height: 180px; }
+.donut-legend { display: flex; flex-direction: column; gap: 10px; }
+.donut-legend-item {
+  display: flex; align-items: center; gap: 8px; font-size: 14px;
+}
+.donut-legend-color {
+  width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0;
+}
+
+/* Tip cards */
+.tip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+.tip-card {
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  transition: border-color 0.2s;
+}
+.tip-card:hover { border-color: var(--accent); }
+.tip-card .tip-num {
+  display: inline-block;
+  background: var(--accent);
+  color: #0f172a;
+  font-weight: 800;
+  font-size: 12px;
+  width: 24px; height: 24px;
+  line-height: 24px;
+  text-align: center;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.tip-card .tip-title { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+.tip-card .tip-body { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+/* Guide sections */
+.guide-section {
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 14px;
+}
+.guide-section h4 {
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+.guide-section p, .guide-section li {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.guide-section ul { padding-left: 18px; }
+
+/* Goal calculator result */
+.goal-result {
+  background: rgba(56,189,248,0.08);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 16px;
+}
+.goal-result .big-number {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent);
+  margin: 8px 0;
+}
+.goal-result .sub-text {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Sub tabs for finance guide */
+.sub-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.sub-tab {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  transition: all 0.2s;
+}
+.sub-tab:hover { border-color: var(--accent); color: var(--text); }
+.sub-tab.active { background: var(--accent); color: #0f172a; border-color: var(--accent); }
+.sub-content { display: none; }
+.sub-content.active { display: block; }
+
 /* Responsive */
 @media (max-width: 640px) {
   .header { padding: 16px 16px 0; }
@@ -352,8 +458,13 @@ label { font-size: 13px; color: var(--muted); margin-bottom: 4px; display: block
   .cal-day { font-size: 11px; min-height: 40px; }
   .toolbar { font-size: 13px; }
   .modal { padding: 20px; }
-  .bar-label { width: 40px; font-size: 11px; }
+  .bar-label { width: 50px; font-size: 11px; }
   .bar-value { width: 60px; font-size: 11px; }
+  .donut-container { gap: 16px; }
+  .donut-svg { width: 150px; height: 150px; }
+  .tip-grid { grid-template-columns: 1fr; }
+  .goal-result .big-number { font-size: 26px; }
+  .sub-tab { padding: 6px 12px; font-size: 12px; }
 }
 </style>
 </head>
@@ -361,10 +472,10 @@ label { font-size: 13px; color: var(--muted); margin-bottom: 4px; display: block
 
 <div class="header">
   <h1><span>Life</span> Manager</h1>
-  <p>일정 &middot; 재테크 &middot; 소비 관리</p>
+  <p>일정 &middot; 재테크 가이드 &middot; 소비 관리</p>
   <div class="tabs">
     <button class="tab active" data-tab="schedule">일정</button>
-    <button class="tab" data-tab="invest">재테크</button>
+    <button class="tab" data-tab="finance">재테크 가이드</button>
     <button class="tab" data-tab="expense">소비</button>
   </div>
 </div>
@@ -374,8 +485,6 @@ label { font-size: 13px; color: var(--muted); margin-bottom: 4px; display: block
   <!-- ======================== 일정 탭 ======================== -->
   <div id="tab-schedule" class="tab-content active">
     <div style="display:grid; grid-template-columns: 1fr; gap:20px;">
-
-      <!-- Calendar -->
       <div class="card">
         <div class="cal-header">
           <div class="cal-nav">
@@ -389,8 +498,6 @@ label { font-size: 13px; color: var(--muted); margin-bottom: 4px; display: block
         </div>
         <div class="cal-grid" id="cal-grid"></div>
       </div>
-
-      <!-- Selected day schedule -->
       <div class="card">
         <div class="card-title">
           <span id="selected-date-label">오늘의 일정</span>
@@ -402,48 +509,170 @@ label { font-size: 13px; color: var(--muted); margin-bottom: 4px; display: block
     </div>
   </div>
 
-  <!-- ======================== 재테크 탭 ======================== -->
-  <div id="tab-invest" class="tab-content">
+  <!-- ======================== 재테크 가이드 탭 ======================== -->
+  <div id="tab-finance" class="tab-content">
 
-    <!-- Total summary -->
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-label">총 자산</div>
-        <div class="stat-value" id="total-asset" style="color:var(--green);">0원</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">자산 수</div>
-        <div class="stat-value" id="asset-count">0</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">이번 달 변동</div>
-        <div class="stat-value" id="month-change">-</div>
+    <!-- Sub navigation -->
+    <div class="sub-tabs">
+      <button class="sub-tab active" data-sub="ratio">배분 계산기</button>
+      <button class="sub-tab" data-sub="plans">재테크 플랜</button>
+      <button class="sub-tab" data-sub="goal">목표 계산기</button>
+      <button class="sub-tab" data-sub="tips">재테크 팁</button>
+    </div>
+
+    <!-- Sub 1: 수입 배분 계산기 -->
+    <div id="sub-ratio" class="sub-content active">
+      <div class="card">
+        <div class="card-title">월급 기반 50/30/20 배분 계산기</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>월 소득 (세후, 원)</label>
+            <input id="fi-income" type="number" placeholder="예: 3000000" oninput="calcRatio()">
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">
+          50/30/20 법칙: 필수지출 50%, 자유지출 30%, 저축/투자 20%
+        </p>
+        <div id="ratio-result" style="display:none;">
+          <div class="donut-container">
+            <svg class="donut-svg" viewBox="0 0 42 42" id="ratio-donut"></svg>
+            <div class="donut-legend" id="ratio-legend"></div>
+          </div>
+          <div class="stats-row" id="ratio-stats"></div>
+          <div class="card" style="background:var(--input-bg);margin-top:12px;">
+            <div class="card-title" style="font-size:14px;">상세 배분 추천</div>
+            <div id="ratio-detail"></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Asset list -->
-    <div class="card">
-      <div class="card-title">
-        자산 목록
-        <div style="flex:1"></div>
-        <button class="btn btn-primary btn-sm" onclick="openAssetModal()">+ 추가</button>
+    <!-- Sub 2: 재테크 플랜 -->
+    <div id="sub-plans" class="sub-content">
+      <div class="card">
+        <div class="card-title">초보자를 위한 재테크 플랜</div>
+
+        <div class="guide-section">
+          <h4>1단계: 비상금 모으기</h4>
+          <p>예상치 못한 지출에 대비하여 <strong>월급 3~6개월분</strong>을 비상금으로 확보하세요.</p>
+          <ul>
+            <li>CMA 통장이나 파킹 통장에 보관 (수시 입출금 + 이자)</li>
+            <li>목표: 월급이 300만원이면 900만~1,800만원</li>
+            <li>매달 월급의 20~30%를 비상금 통장에 자동이체</li>
+            <li>비상금이 모이기 전까지는 투자보다 저축 우선</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h4>2단계: 적금 활용하기</h4>
+          <p>안정적인 목돈 마련을 위한 적금 전략입니다.</p>
+          <ul>
+            <li><strong>단기 (6개월~1년)</strong>: 정기적금 - 목표 금액이 정해져 있을 때</li>
+            <li><strong>장기 (1년~3년)</strong>: 자유적금 + 청년 우대 적금 활용</li>
+            <li>금리 비교 사이트에서 최고 금리 검색 (은행연합회 등)</li>
+            <li>급여 통장과 적금을 같은 은행으로 하면 우대금리 가능</li>
+            <li>적금 만기 후 재예치 vs 투자 전환 결정</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h4>3단계: 주식/ETF 초보 가이드</h4>
+          <p>적금으로 종잣돈을 모은 후, 투자를 시작해보세요.</p>
+          <ul>
+            <li><strong>ETF 추천</strong>: 개별 주식보다 ETF로 시작 (분산투자 효과)</li>
+            <li><strong>국내 ETF</strong>: KODEX 200, TIGER S&P500 등 지수 추종 ETF</li>
+            <li><strong>해외 ETF</strong>: VOO (S&P500), QQQ (나스닥) - 달러 분산 효과</li>
+            <li><strong>적립식 투자</strong>: 매월 일정 금액을 정해 분할 매수 (시점 분산)</li>
+            <li><strong>절대 하지 말 것</strong>: 빚내서 투자, 한 종목 올인, 단타 매매</li>
+            <li>증권사 앱 설치 후 소액(10만원~)부터 연습</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h4>4단계: 펀드 가이드</h4>
+          <p>전문가에게 운용을 맡기는 간접투자 방법입니다.</p>
+          <ul>
+            <li><strong>인덱스 펀드</strong>: 시장 지수를 따라가는 저비용 펀드 (보수 0.1~0.5%)</li>
+            <li><strong>TDF (Target Date Fund)</strong>: 은퇴 시점에 맞춰 자동으로 자산 배분 조절</li>
+            <li><strong>채권형 펀드</strong>: 안정적 수익, 주식 대비 낮은 변동성</li>
+            <li><strong>확인할 것</strong>: 총보수율, 운용 실적, 펀드 규모</li>
+            <li>연금저축펀드로 세액공제 혜택까지 챙기기 (연 최대 400만원)</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h4>5단계: 세금 혜택 활용</h4>
+          <ul>
+            <li><strong>연금저축</strong>: 연 400만원까지 세액공제 (13.2~16.5%)</li>
+            <li><strong>IRP</strong>: 추가 300만원 세액공제</li>
+            <li><strong>ISA</strong>: 비과세 혜택 (일반형 200만원, 서민형 400만원)</li>
+            <li><strong>청약저축</strong>: 소득공제 + 내집 마련 기회</li>
+          </ul>
+        </div>
       </div>
-      <div id="asset-list"></div>
     </div>
 
-    <!-- Monthly history -->
-    <div class="card">
-      <div class="card-title">
-        월별 자산 변동
-        <div style="flex:1"></div>
-        <button class="btn btn-primary btn-sm" onclick="openHistoryModal()">+ 기록</button>
+    <!-- Sub 3: 목표 계산기 -->
+    <div id="sub-goal" class="sub-content">
+      <div class="card">
+        <div class="card-title">목표 금액 저축 계산기</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>목표 금액 (원)</label>
+            <input id="goal-amount" type="number" placeholder="예: 10000000">
+          </div>
+          <div class="form-group">
+            <label>현재 모은 금액 (원)</label>
+            <input id="goal-current" type="number" placeholder="예: 2000000" value="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>목표 기간 (개월)</label>
+            <input id="goal-months" type="number" placeholder="예: 12">
+          </div>
+          <div class="form-group">
+            <label>예상 연이율 (%)</label>
+            <input id="goal-rate" type="number" placeholder="예: 3.5" value="0">
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="calcGoal()" style="width:100%;">계산하기</button>
+        <div id="goal-result"></div>
       </div>
-      <div id="asset-history-list"></div>
+
+      <!-- Saved goals -->
+      <div class="card">
+        <div class="card-title">
+          저축 목표 관리
+          <div style="flex:1"></div>
+          <button class="btn btn-primary btn-sm" onclick="saveGoal()">현재 계산 저장</button>
+        </div>
+        <div id="goal-list"></div>
+      </div>
     </div>
+
+    <!-- Sub 4: 재테크 팁 -->
+    <div id="sub-tips" class="sub-content">
+      <div class="card">
+        <div class="card-title">실전 재테크 팁 10선</div>
+        <div class="tip-grid" id="tip-grid"></div>
+      </div>
+    </div>
+
   </div>
 
   <!-- ======================== 소비 탭 ======================== -->
   <div id="tab-expense" class="tab-content">
+
+    <!-- Income-based budget recommendation -->
+    <div class="card" id="expense-income-card">
+      <div class="card-title">
+        소득 기반 예산 추천
+        <div style="flex:1"></div>
+        <button class="btn btn-outline btn-sm" onclick="openIncomeModal()">월급 설정</button>
+      </div>
+      <div id="expense-budget-rec"></div>
+    </div>
 
     <!-- Budget & summary -->
     <div class="stats-row">
@@ -545,66 +774,6 @@ label { font-size: 13px; color: var(--muted); margin-bottom: 4px; display: block
   </div>
 </div>
 
-<!-- Asset Modal -->
-<div class="modal-overlay" id="modal-asset">
-  <div class="modal">
-    <h3>자산 추가</h3>
-    <div class="form-row">
-      <div class="form-group">
-        <label>종류</label>
-        <select id="asset-type">
-          <option value="deposit">예금</option>
-          <option value="stock">주식</option>
-          <option value="fund">펀드</option>
-          <option value="realestate">부동산</option>
-          <option value="etc">기타</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>이름</label>
-        <input id="asset-name" placeholder="자산명">
-      </div>
-    </div>
-    <div class="form-group" style="margin-bottom:12px;">
-      <label>금액 (원)</label>
-      <input id="asset-amount" type="number" placeholder="0">
-    </div>
-    <div class="form-group" style="margin-bottom:0;">
-      <label>메모</label>
-      <textarea id="asset-memo" rows="2" placeholder="메모 (선택)"></textarea>
-    </div>
-    <div class="modal-actions">
-      <button class="btn btn-outline" onclick="closeModal('modal-asset')">취소</button>
-      <button class="btn btn-primary" onclick="saveAsset()">저장</button>
-    </div>
-  </div>
-</div>
-
-<!-- Asset History Modal -->
-<div class="modal-overlay" id="modal-history">
-  <div class="modal">
-    <h3>월별 자산 기록</h3>
-    <div class="form-row">
-      <div class="form-group">
-        <label>년월</label>
-        <input id="hist-month" type="month">
-      </div>
-      <div class="form-group">
-        <label>총 자산 (원)</label>
-        <input id="hist-amount" type="number" placeholder="0">
-      </div>
-    </div>
-    <div class="form-group" style="margin-bottom:0;">
-      <label>메모</label>
-      <textarea id="hist-memo" rows="2" placeholder="메모 (선택)"></textarea>
-    </div>
-    <div class="modal-actions">
-      <button class="btn btn-outline" onclick="closeModal('modal-history')">취소</button>
-      <button class="btn btn-primary" onclick="saveHistory()">저장</button>
-    </div>
-  </div>
-</div>
-
 <!-- Expense Modal -->
 <div class="modal-overlay" id="modal-expense">
   <div class="modal">
@@ -623,6 +792,8 @@ label { font-size: 13px; color: var(--muted); margin-bottom: 4px; display: block
           <option value="culture">문화</option>
           <option value="education">교육</option>
           <option value="medical">의료</option>
+          <option value="housing">주거</option>
+          <option value="telecom">통신</option>
           <option value="etc">기타</option>
         </select>
       </div>
@@ -657,16 +828,31 @@ label { font-size: 13px; color: var(--muted); margin-bottom: 4px; display: block
   </div>
 </div>
 
+<!-- Income Modal (for expense tab) -->
+<div class="modal-overlay" id="modal-income">
+  <div class="modal">
+    <h3>월 소득 설정</h3>
+    <div class="form-group" style="margin-bottom:0;">
+      <label>월 소득 (세후, 원)</label>
+      <input id="income-input" type="number" placeholder="0">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('modal-income')">취소</button>
+      <button class="btn btn-primary" onclick="saveIncome()">저장</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ============================
 // Data Store
 // ============================
 const KEYS = {
   schedules: 'lm_schedules',
-  assets: 'lm_assets',
-  assetHistory: 'lm_asset_history',
   expenses: 'lm_expenses',
-  budget: 'lm_budget'
+  budget: 'lm_budget',
+  income: 'lm_income',
+  goals: 'lm_goals'
 };
 
 function load(key) {
@@ -691,6 +877,16 @@ document.querySelectorAll('.tab').forEach(tab => {
   });
 });
 
+// Sub-tab switching
+document.querySelectorAll('.sub-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.sub-content').forEach(tc => tc.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('sub-' + tab.dataset.sub).classList.add('active');
+  });
+});
+
 // ============================
 // Modal helpers
 // ============================
@@ -701,7 +897,7 @@ document.querySelectorAll('.modal-overlay').forEach(ov => {
 });
 
 // ============================
-// SCHEDULE
+// SCHEDULE (kept as-is)
 // ============================
 let calYear, calMonth, selectedDate;
 const CAT_LABELS = { work: '업무', personal: '개인', family: '가족', appointment: '약속' };
@@ -739,11 +935,8 @@ function renderCal() {
   const startDay = first.getDay();
   const todayStr = toDateStr(new Date());
   const schedules = load(KEYS.schedules);
-
-  // dates with events
   const eventDates = new Set(schedules.map(s => s.date));
 
-  // fill previous month
   const prevLast = new Date(calYear, calMonth, 0);
   for (let i = startDay - 1; i >= 0; i--) {
     const d = prevLast.getDate() - i;
@@ -755,7 +948,6 @@ function renderCal() {
     html += `<div class="${cls.join(' ')}" onclick="selectDate('${ds}')">${d}${eventDates.has(ds)?'<div class="cal-dot"></div>':''}</div>`;
   }
 
-  // current month
   for (let d = 1; d <= last.getDate(); d++) {
     const ds = toDateStr(new Date(calYear, calMonth, d));
     const dow = new Date(calYear, calMonth, d).getDay();
@@ -767,7 +959,6 @@ function renderCal() {
     html += `<div class="${cls.join(' ')}" onclick="selectDate('${ds}')">${d}${eventDates.has(ds)?'<div class="cal-dot"></div>':''}</div>`;
   }
 
-  // fill next month
   const remaining = 42 - (startDay + last.getDate());
   for (let d = 1; d <= remaining; d++) {
     const ds = toDateStr(new Date(calYear, calMonth + 1, d));
@@ -784,7 +975,6 @@ function renderCal() {
 
 function selectDate(ds) {
   selectedDate = ds;
-  // navigate to that month if needed
   const d = new Date(ds);
   calYear = d.getFullYear();
   calMonth = d.getMonth();
@@ -860,150 +1050,252 @@ function deleteSchedule(id) {
 }
 
 // ============================
-// INVESTMENT
+// FINANCE GUIDE
 // ============================
-const ASSET_TYPES = { deposit: '예금', stock: '주식', fund: '펀드', realestate: '부동산', etc: '기타' };
-const ASSET_BADGE = { deposit: 'badge-green', stock: 'badge-blue', fund: 'badge-purple', realestate: 'badge-yellow', etc: 'badge-orange' };
 
-function renderAssets() {
-  const assets = load(KEYS.assets);
-  const total = assets.reduce((s,a) => s + Number(a.amount), 0);
-  document.getElementById('total-asset').textContent = fmtWon(total);
-  document.getElementById('asset-count').textContent = assets.length + '개';
+function calcRatio() {
+  const income = Number(document.getElementById('fi-income').value) || 0;
+  const resultEl = document.getElementById('ratio-result');
+  if (income <= 0) { resultEl.style.display = 'none'; return; }
+  resultEl.style.display = 'block';
 
-  // Month change
-  const history = load(KEYS.assetHistory).sort((a,b) => b.month.localeCompare(a.month));
-  if (history.length >= 2) {
-    const diff = Number(history[0].amount) - Number(history[1].amount);
-    const el = document.getElementById('month-change');
-    el.textContent = (diff >= 0 ? '+' : '') + fmtWon(diff);
-    el.style.color = diff >= 0 ? 'var(--green)' : 'var(--red)';
-  } else {
-    document.getElementById('month-change').textContent = '-';
-    document.getElementById('month-change').style.color = 'var(--text)';
-  }
+  // Save income for expense tab too
+  saveVal(KEYS.income, income);
+  renderExpenseBudgetRec();
 
-  const list = document.getElementById('asset-list');
-  if (!assets.length) {
-    list.innerHTML = '<div class="schedule-empty">등록된 자산이 없습니다</div>';
-  } else {
-    list.innerHTML = assets.map(a => `
-      <div class="list-item">
-        <div class="list-item-main">
-          <div class="list-item-title">${esc(a.name)} <span class="badge ${ASSET_BADGE[a.type]||'badge-blue'}" style="margin-left:6px;">${ASSET_TYPES[a.type]||a.type}</span></div>
-          ${a.memo ? `<div class="list-item-sub">${esc(a.memo)}</div>` : ''}
-        </div>
-        <div class="list-item-amount">${fmtWon(a.amount)}</div>
-        <button class="del-btn" onclick="deleteAsset('${a.id}')" title="삭제">&times;</button>
-      </div>
-    `).join('');
-  }
+  const essential = Math.round(income * 0.5);
+  const flexible = Math.round(income * 0.3);
+  const savingInvest = Math.round(income * 0.2);
 
-  renderAssetHistory();
+  // Donut chart
+  const colors = ['#f87171', '#fbbf24', '#4ade80'];
+  const labels = ['필수지출 50%', '자유지출 30%', '저축/투자 20%'];
+  const amounts = [essential, flexible, savingInvest];
+  const percents = [50, 30, 20];
+
+  drawDonut('ratio-donut', percents, colors);
+
+  document.getElementById('ratio-legend').innerHTML = labels.map((l, i) =>
+    `<div class="donut-legend-item">
+      <div class="donut-legend-color" style="background:${colors[i]}"></div>
+      <span>${l}: <strong>${fmtWon(amounts[i])}</strong></span>
+    </div>`
+  ).join('');
+
+  document.getElementById('ratio-stats').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-label">필수지출</div>
+      <div class="stat-value" style="color:var(--red);font-size:20px;">${fmtWon(essential)}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">자유지출</div>
+      <div class="stat-value" style="color:var(--yellow);font-size:20px;">${fmtWon(flexible)}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">저축/투자</div>
+      <div class="stat-value" style="color:var(--green);font-size:20px;">${fmtWon(savingInvest)}</div>
+    </div>
+  `;
+
+  // Detailed breakdown
+  const details = [
+    { cat: '주거비 (월세/대출)', pct: '25~35%', amt: fmtWon(Math.round(income * 0.3)), color: 'var(--red)' },
+    { cat: '식비', pct: '10~15%', amt: fmtWon(Math.round(income * 0.12)), color: 'var(--orange)' },
+    { cat: '교통/통신', pct: '5~10%', amt: fmtWon(Math.round(income * 0.08)), color: 'var(--yellow)' },
+    { cat: '여가/쇼핑', pct: '15~20%', amt: fmtWon(Math.round(income * 0.15)), color: 'var(--pink)' },
+    { cat: '자기개발', pct: '5~10%', amt: fmtWon(Math.round(income * 0.08)), color: 'var(--purple)' },
+    { cat: '비상금 적립', pct: '5~10%', amt: fmtWon(Math.round(income * 0.07)), color: 'var(--accent)' },
+    { cat: '투자 (ETF/펀드)', pct: '10~15%', amt: fmtWon(Math.round(income * 0.13)), color: 'var(--green)' },
+  ];
+
+  document.getElementById('ratio-detail').innerHTML = details.map(d =>
+    `<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;">
+      <span style="color:${d.color};">${d.cat}</span>
+      <span style="color:var(--muted);">${d.pct}</span>
+      <span style="font-weight:600;">${d.amt}</span>
+    </div>`
+  ).join('');
 }
 
-function openAssetModal() {
-  document.getElementById('asset-type').value = 'deposit';
-  document.getElementById('asset-name').value = '';
-  document.getElementById('asset-amount').value = '';
-  document.getElementById('asset-memo').value = '';
-  openModal('modal-asset');
-}
+function drawDonut(svgId, percents, colors) {
+  const svg = document.getElementById(svgId);
+  const cx = 21, cy = 21, r = 15.91549;
+  let offset = 25; // start from top
+  let html = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="transparent" stroke="var(--input-bg)" stroke-width="5"/>`;
 
-function saveAsset() {
-  const name = document.getElementById('asset-name').value.trim();
-  const amount = document.getElementById('asset-amount').value;
-  if (!name || !amount) return alert('이름과 금액을 입력하세요.');
-  const assets = load(KEYS.assets);
-  assets.push({
-    id: genId(),
-    type: document.getElementById('asset-type').value,
-    name,
-    amount: Number(amount),
-    memo: document.getElementById('asset-memo').value.trim()
+  percents.forEach((pct, i) => {
+    html += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="transparent"
+      stroke="${colors[i]}" stroke-width="5"
+      stroke-dasharray="${pct} ${100 - pct}"
+      stroke-dashoffset="${offset}"
+      stroke-linecap="round"/>`;
+    offset -= pct;
   });
-  save(KEYS.assets, assets);
-  closeModal('modal-asset');
-  renderAssets();
+
+  // Center text
+  html += `<text x="${cx}" y="${cy}" text-anchor="middle" dy="0.1em" font-size="4" fill="var(--text)" font-weight="700">50/30/20</text>`;
+  svg.innerHTML = html;
 }
 
-function deleteAsset(id) {
-  if (!confirm('이 자산을 삭제하시겠습니까?')) return;
-  save(KEYS.assets, load(KEYS.assets).filter(a => a.id !== id));
-  renderAssets();
-}
+// ============================
+// GOAL CALCULATOR
+// ============================
 
-function renderAssetHistory() {
-  const history = load(KEYS.assetHistory).sort((a,b) => b.month.localeCompare(a.month));
-  const list = document.getElementById('asset-history-list');
-  if (!history.length) {
-    list.innerHTML = '<div class="schedule-empty">기록이 없습니다</div>';
+function calcGoal() {
+  const target = Number(document.getElementById('goal-amount').value) || 0;
+  const current = Number(document.getElementById('goal-current').value) || 0;
+  const months = Number(document.getElementById('goal-months').value) || 0;
+  const annualRate = Number(document.getElementById('goal-rate').value) || 0;
+
+  if (target <= 0 || months <= 0) return alert('목표 금액과 기간을 입력하세요.');
+
+  const remaining = target - current;
+  if (remaining <= 0) {
+    document.getElementById('goal-result').innerHTML = `
+      <div class="goal-result">
+        <div class="sub-text">이미 목표를 달성했습니다!</div>
+        <div class="big-number">목표 달성!</div>
+      </div>`;
     return;
   }
-  list.innerHTML = history.map((h, i) => {
-    const prev = history[i+1];
-    let diffHtml = '';
-    if (prev) {
-      const diff = Number(h.amount) - Number(prev.amount);
-      const color = diff >= 0 ? 'var(--green)' : 'var(--red)';
-      diffHtml = `<span style="color:${color};font-size:12px;margin-left:8px;">${diff>=0?'+':''}${fmtWon(diff)}</span>`;
-    }
+
+  let monthlySave;
+  if (annualRate > 0) {
+    // PMT formula for future value
+    const monthlyRate = annualRate / 100 / 12;
+    const fvFactor = (Math.pow(1 + monthlyRate, months) - 1) / monthlyRate;
+    const currentFV = current * Math.pow(1 + monthlyRate, months);
+    monthlySave = Math.ceil((target - currentFV) / fvFactor);
+    if (monthlySave < 0) monthlySave = 0;
+  } else {
+    monthlySave = Math.ceil(remaining / months);
+  }
+
+  const totalSaved = monthlySave * months;
+  const interest = annualRate > 0 ? (totalSaved + current) - remaining - current : 0;
+  const years = Math.floor(months / 12);
+  const remMonths = months % 12;
+  const periodStr = years > 0 ? `${years}년 ${remMonths > 0 ? remMonths + '개월' : ''}` : `${months}개월`;
+
+  document.getElementById('goal-result').innerHTML = `
+    <div class="goal-result">
+      <div class="sub-text">매월 저축해야 할 금액</div>
+      <div class="big-number">${fmtWon(monthlySave)}</div>
+      <div class="sub-text" style="margin-top:12px;">
+        목표: ${fmtWon(target)} | 기간: ${periodStr}
+        ${annualRate > 0 ? `| 예상 이자: 약 ${fmtWon(Math.max(0,Math.round(target - current - totalSaved + (annualRate > 0 ? totalSaved * annualRate / 100 / 2 * months / 12 : 0))))}` : ''}
+      </div>
+      <div style="margin-top:16px;">
+        <div class="budget-bar" style="height:16px;">
+          <div class="budget-fill" style="width:${Math.min(100, current/target*100)}%;background:var(--green);"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);">
+          <span>현재: ${fmtWon(current)} (${(current/target*100).toFixed(1)}%)</span>
+          <span>목표: ${fmtWon(target)}</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+function saveGoal() {
+  const target = Number(document.getElementById('goal-amount').value) || 0;
+  const months = Number(document.getElementById('goal-months').value) || 0;
+  if (target <= 0 || months <= 0) return alert('먼저 목표를 계산해주세요.');
+
+  const current = Number(document.getElementById('goal-current').value) || 0;
+  const rate = Number(document.getElementById('goal-rate').value) || 0;
+  const remaining = target - current;
+  let monthlySave;
+  if (rate > 0) {
+    const monthlyRate = rate / 100 / 12;
+    const fvFactor = (Math.pow(1 + monthlyRate, months) - 1) / monthlyRate;
+    const currentFV = current * Math.pow(1 + monthlyRate, months);
+    monthlySave = Math.ceil((target - currentFV) / fvFactor);
+    if (monthlySave < 0) monthlySave = 0;
+  } else {
+    monthlySave = Math.ceil(remaining / months);
+  }
+
+  const goals = load(KEYS.goals);
+  goals.push({
+    id: genId(),
+    target, current, months, rate, monthlySave,
+    createdAt: new Date().toISOString()
+  });
+  save(KEYS.goals, goals);
+  renderGoals();
+}
+
+function renderGoals() {
+  const goals = load(KEYS.goals);
+  const el = document.getElementById('goal-list');
+  if (!goals.length) {
+    el.innerHTML = '<div class="schedule-empty">저장된 목표가 없습니다</div>';
+    return;
+  }
+  el.innerHTML = goals.map(g => {
+    const pct = Math.min(100, g.current / g.target * 100).toFixed(1);
     return `
       <div class="list-item">
         <div class="list-item-main">
-          <div class="list-item-title">${h.month}${diffHtml}</div>
-          ${h.memo ? `<div class="list-item-sub">${esc(h.memo)}</div>` : ''}
+          <div class="list-item-title">목표: ${fmtWon(g.target)}</div>
+          <div class="list-item-sub">
+            ${g.months}개월 | 월 ${fmtWon(g.monthlySave)} | 진행률 ${pct}%
+          </div>
+          <div class="budget-bar" style="height:8px;margin:6px 0 0;">
+            <div class="budget-fill" style="width:${pct}%;background:var(--green);"></div>
+          </div>
         </div>
-        <div class="list-item-amount">${fmtWon(h.amount)}</div>
-        <button class="del-btn" onclick="deleteHistory('${h.id}')" title="삭제">&times;</button>
-      </div>
-    `;
+        <button class="del-btn" onclick="deleteGoal('${g.id}')" title="삭제">&times;</button>
+      </div>`;
   }).join('');
 }
 
-function openHistoryModal() {
-  const now = new Date();
-  document.getElementById('hist-month').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
-  const assets = load(KEYS.assets);
-  document.getElementById('hist-amount').value = assets.reduce((s,a) => s + Number(a.amount), 0);
-  document.getElementById('hist-memo').value = '';
-  openModal('modal-history');
+function deleteGoal(id) {
+  if (!confirm('이 목표를 삭제하시겠습니까?')) return;
+  save(KEYS.goals, load(KEYS.goals).filter(g => g.id !== id));
+  renderGoals();
 }
 
-function saveHistory() {
-  const month = document.getElementById('hist-month').value;
-  const amount = document.getElementById('hist-amount').value;
-  if (!month || !amount) return alert('년월과 금액을 입력하세요.');
-  const history = load(KEYS.assetHistory);
-  // replace if same month exists
-  const idx = history.findIndex(h => h.month === month);
-  const entry = { id: genId(), month, amount: Number(amount), memo: document.getElementById('hist-memo').value.trim() };
-  if (idx >= 0) history[idx] = entry;
-  else history.push(entry);
-  save(KEYS.assetHistory, history);
-  closeModal('modal-history');
-  renderAssets();
-}
+// ============================
+// FINANCE TIPS
+// ============================
+const TIPS = [
+  { title: '월급날 자동이체 설정', body: '월급이 들어오면 저축/투자 금액이 자동으로 빠져나가게 설정하세요. "남으면 저축"이 아니라 "저축하고 남은 걸 쓰기" 원칙입니다.' },
+  { title: '비상금 3개월분 확보', body: '갑작스러운 실직, 질병에 대비해 최소 월급 3개월분은 CMA/파킹통장에 넣어두세요. 비상금은 투자가 아닌 보험입니다.' },
+  { title: '카드 대신 체크카드', body: '신용카드 과소비를 막으려면 체크카드로 전환하세요. 소득공제율도 체크카드(30%)가 신용카드(15%)보다 높습니다.' },
+  { title: '구독 서비스 정리', body: '매달 빠져나가는 구독료를 점검하세요. 안 쓰는 OTT, 앱, 멤버십은 바로 해지. 연 10~30만원 절약 가능합니다.' },
+  { title: 'ETF 적립식 투자', body: '매월 일정 금액을 ETF에 분할 매수하면 시점 위험을 줄일 수 있습니다. KODEX 200, TIGER S&P500 등 지수 ETF로 시작하세요.' },
+  { title: '연금저축 세액공제', body: '연금저축에 연 400만원을 넣으면 최대 66만원(16.5%) 세액공제를 받습니다. IRP 추가 300만원까지 합치면 총 115.5만원 환급 가능.' },
+  { title: '커피값의 복리 마법', body: '매일 5,000원 커피를 줄이면 월 15만원, 연 180만원. 이를 연 7% 수익률로 10년 투자하면 약 2,600만원이 됩니다.' },
+  { title: '72의 법칙', body: '투자금이 2배가 되는 기간 = 72 / 수익률. 연 6% 수익이면 12년, 연 8%면 9년이면 원금이 2배가 됩니다.' },
+  { title: '보험 리모델링', body: '보장성 보험은 필요하지만, 저축성 보험은 수익률이 낮습니다. 불필요한 보험을 정리하고, 보장 중복을 제거하세요.' },
+  { title: '가계부 꾸준히 기록', body: '지출을 기록하면 소비 패턴이 보입니다. 이 앱의 소비 탭을 활용해서 매일 기록하는 습관을 들이세요. 한 달만 해보면 놀라운 인사이트를 얻습니다.' }
+];
 
-function deleteHistory(id) {
-  if (!confirm('이 기록을 삭제하시겠습니까?')) return;
-  save(KEYS.assetHistory, load(KEYS.assetHistory).filter(h => h.id !== id));
-  renderAssets();
+function renderTips() {
+  document.getElementById('tip-grid').innerHTML = TIPS.map((t, i) =>
+    `<div class="tip-card">
+      <div class="tip-title"><span class="tip-num">${i+1}</span>${t.title}</div>
+      <div class="tip-body">${t.body}</div>
+    </div>`
+  ).join('');
 }
 
 // ============================
 // EXPENSE
 // ============================
 let expYear, expMonth;
-const EXP_CATS = { food: '식비', transport: '교통', shopping: '쇼핑', culture: '문화', education: '교육', medical: '의료', etc: '기타' };
-const EXP_COLORS = { food: '#f87171', transport: '#38bdf8', shopping: '#f472b6', culture: '#a78bfa', education: '#4ade80', medical: '#fbbf24', etc: '#94a3b8' };
-const EXP_BADGE = { food: 'badge-red', transport: 'badge-blue', shopping: 'badge-pink', culture: 'badge-purple', education: 'badge-green', medical: 'badge-yellow', etc: 'badge-orange' };
+const EXP_CATS = { food: '식비', transport: '교통', shopping: '쇼핑', culture: '문화', education: '교육', medical: '의료', housing: '주거', telecom: '통신', etc: '기타' };
+const EXP_COLORS = { food: '#f87171', transport: '#38bdf8', shopping: '#f472b6', culture: '#a78bfa', education: '#4ade80', medical: '#fbbf24', housing: '#fb923c', telecom: '#94a3b8', etc: '#64748b' };
+const EXP_BADGE = { food: 'badge-red', transport: 'badge-blue', shopping: 'badge-pink', culture: 'badge-purple', education: 'badge-green', medical: 'badge-yellow', housing: 'badge-orange', telecom: 'badge-blue', etc: 'badge-orange' };
 
 function initExpense() {
   const now = new Date();
   expYear = now.getFullYear();
   expMonth = now.getMonth();
   renderExpenses();
+  renderExpenseBudgetRec();
 }
 
 function expMonthPrev() { expMonth--; if(expMonth<0){expMonth=11;expYear--;} renderExpenses(); }
@@ -1012,6 +1304,41 @@ function expMonthNext() { expMonth++; if(expMonth>11){expMonth=0;expYear++;} ren
 function getMonthExpenses() {
   const prefix = `${expYear}-${String(expMonth+1).padStart(2,'0')}`;
   return load(KEYS.expenses).filter(e => e.date.startsWith(prefix));
+}
+
+function renderExpenseBudgetRec() {
+  const income = Number(loadVal(KEYS.income)) || 0;
+  const el = document.getElementById('expense-budget-rec');
+  if (income <= 0) {
+    el.innerHTML = '<div style="text-align:center;color:var(--muted);padding:12px;font-size:14px;">월급을 설정하면 카테고리별 추천 예산을 볼 수 있습니다.</div>';
+    return;
+  }
+
+  const recs = [
+    { cat: '식비', pct: 12, color: EXP_COLORS.food },
+    { cat: '교통', pct: 5, color: EXP_COLORS.transport },
+    { cat: '주거', pct: 30, color: EXP_COLORS.housing },
+    { cat: '통신', pct: 3, color: EXP_COLORS.telecom },
+    { cat: '쇼핑', pct: 10, color: EXP_COLORS.shopping },
+    { cat: '문화/여가', pct: 8, color: EXP_COLORS.culture },
+    { cat: '교육', pct: 5, color: EXP_COLORS.education },
+    { cat: '저축/투자', pct: 20, color: '#4ade80' },
+  ];
+
+  el.innerHTML = `
+    <div style="font-size:13px;color:var(--muted);margin-bottom:12px;">월 소득: <strong style="color:var(--text);">${fmtWon(income)}</strong> 기준 추천 배분</div>
+    <div class="bar-chart">
+      ${recs.map(r => {
+        const amt = Math.round(income * r.pct / 100);
+        return `<div class="bar-row">
+          <div class="bar-label">${r.cat}</div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:${r.pct / 30 * 100}%;background:${r.color};"></div>
+          </div>
+          <div class="bar-value">${fmtWon(amt)}<br><span style="font-size:10px;color:var(--muted);">${r.pct}%</span></div>
+        </div>`;
+      }).join('')}
+    </div>`;
 }
 
 function renderExpenses() {
@@ -1110,7 +1437,6 @@ function saveExpense() {
   });
   save(KEYS.expenses, expenses);
   closeModal('modal-expense');
-  // Navigate to that month
   const d = new Date(date);
   expYear = d.getFullYear();
   expMonth = d.getMonth();
@@ -1135,16 +1461,31 @@ function saveBudget() {
   renderExpenses();
 }
 
+function openIncomeModal() {
+  document.getElementById('income-input').value = loadVal(KEYS.income) || '';
+  openModal('modal-income');
+}
+
+function saveIncome() {
+  const val = document.getElementById('income-input').value;
+  saveVal(KEYS.income, val || '0');
+  closeModal('modal-income');
+  renderExpenseBudgetRec();
+  // Also update finance tab income input if present
+  const fiIncome = document.getElementById('fi-income');
+  if (fiIncome && val) { fiIncome.value = val; calcRatio(); }
+}
+
 // ============================
 // Data Import/Export
 // ============================
 function exportData() {
   const data = {
     schedules: load(KEYS.schedules),
-    assets: load(KEYS.assets),
-    assetHistory: load(KEYS.assetHistory),
     expenses: load(KEYS.expenses),
+    goals: load(KEYS.goals),
     budget: loadVal(KEYS.budget) || '0',
+    income: loadVal(KEYS.income) || '0',
     exportedAt: new Date().toISOString()
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -1164,13 +1505,14 @@ function importData(event) {
       const data = JSON.parse(e.target.result);
       if (!confirm('기존 데이터가 덮어씌워집니다. 계속하시겠습니까?')) return;
       if (data.schedules) save(KEYS.schedules, data.schedules);
-      if (data.assets) save(KEYS.assets, data.assets);
-      if (data.assetHistory) save(KEYS.assetHistory, data.assetHistory);
       if (data.expenses) save(KEYS.expenses, data.expenses);
+      if (data.goals) save(KEYS.goals, data.goals);
       if (data.budget) saveVal(KEYS.budget, data.budget);
-      renderCal();
-      renderAssets();
-      renderExpenses();
+      if (data.income) saveVal(KEYS.income, data.income);
+      // Legacy support
+      if (data.assets) save('lm_assets', data.assets);
+      if (data.assetHistory) save('lm_asset_history', data.assetHistory);
+      initAll();
       alert('데이터를 성공적으로 가져왔습니다.');
     } catch {
       alert('잘못된 파일 형식입니다.');
@@ -1192,9 +1534,19 @@ function esc(s) {
 // ============================
 // Init
 // ============================
-initCal();
-renderAssets();
-initExpense();
+function initAll() {
+  initCal();
+  initExpense();
+  renderGoals();
+  renderTips();
+  // Restore income to finance input
+  const savedIncome = loadVal(KEYS.income);
+  if (savedIncome && Number(savedIncome) > 0) {
+    document.getElementById('fi-income').value = savedIncome;
+    calcRatio();
+  }
+}
+initAll();
 </script>
 </body>
 </html>
